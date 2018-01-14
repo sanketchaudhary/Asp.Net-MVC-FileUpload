@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model FileUpload.Models.ChangeRequest
+
+<div class="container" style="padding-top: 30px;">
+    <div class="row">
+        <form action="/Home/FileUpload" method="post" enctype="multipart/form-data">
+
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#divBasicDetails" data-toggle="tab">Basic Details</a></li>
+                <li role="presentation"><a href="#divSiteDetails" data-toggle="tab">Site Details</a></li>
+                <li role="presentation"><a href="#" data-toggle="tab">Approver Details</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="divBasicDetails" class="tab-pane">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="fileType">First Name:</label>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="fileUpload">Last Name:</label>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div id="fileTypeDiv" class="form-group">
+                            <label for="fileType">File type:</label>
+                            @Html.TextBoxFor(m => m.FileDetails[0].FileType, new { @class = "form-control", id = "fileType0" })
+                        </div>
+                        <div id="fileUploadDiv" class="form-group">
+                            <label for="fileUpload">Browse file:</label>
+                            @Html.TextBoxFor(m => m.FileDetails[0].FileUpload, new { type = "file", @class = "form-control", id = "fileUpload0" })
+                            @Html.HiddenFor(m => m.FileDetails[0].IsDeleted, new { id = "isDeleted0" })
+                            @Html.HiddenFor(m => m.FileDetails[0].IsUploaded, new { id = "isUploaded0" })
+                        </div>
+                    </div>
+
+                    <button type="button" id="btnUpload" class="btn btn-default" style="margin-top: 25px;">Upload</button>
+                </div>
+
+                <div id="divSiteDetails" class="tab-pane">
+                    Site Details
+                </div>
+            </div>
+         
+            
+            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Submit</button>
+        </form>
+        <br />
+        <table id="tblFileUpload" class="table">
+            <thead>
+                <tr>
+                    <th>File type</th>
+                    <th>File name</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Scripts/ChangeRequest/changeRequest.js"></script>
